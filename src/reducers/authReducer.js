@@ -16,7 +16,11 @@ export const authReducer = (state = {},action) => {
                 name: action.payload.displayName
             };
         case types.logout:
-             return { };            
+            
+             return {
+                        uid:null,
+                        name:null
+                    };            
         default:
             return state;  
     }

@@ -6,11 +6,11 @@ import { startNewNote } from '../../actions/notes';
 
 export const Sidebar = () => {
   const dispatch = useDispatch();
-  const {uid} = useSelector( state => state.ui);
+
   const {name} = useSelector( state => state.auth);
 
   const handleLogout = ()=>{
-    dispatch(startLogout(uid));
+    dispatch(startLogout());
   }
 
   const handleAddNew = ()=>{
