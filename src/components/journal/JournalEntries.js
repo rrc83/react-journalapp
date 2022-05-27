@@ -1,15 +1,20 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { JournalEntry } from './JournalEntry';
 
 export const JournalEntries = () => {
-    const entries = [1,2,3,4];
+    const {notes} = useSelector(state => state.notes);
 
-  
+      
     return (
     <div className='journal__entries'>
         {
-            entries.map(e=>{
-                return <JournalEntry key={e} />
+            notes.map(note=>{
+                return <JournalEntry
+                                     key={note.id}
+                                     {...note}                                
+                                     
+                        />
             })
         }
 
@@ -17,3 +22,4 @@ export const JournalEntries = () => {
     </div>
   )
 }
+/*url='https://www.mactualidad.com/wp-content/uploads/2014/07/smooth-ivy.jpg'*/

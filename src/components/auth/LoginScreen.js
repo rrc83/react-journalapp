@@ -2,16 +2,17 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
-import { removeError,setError } from "../../actions/ui";
 import { useForm } from '../../hooks/useForm'
 import validator from 'validator';
+import Swal from 'sweetalert2'
+
 
 export const LoginScreen = () => {
   const [formValues,handleInputChange] = useForm({email:'',password:''});
   const {email,password} = formValues;
   const dispatch = useDispatch();
-  const {msgError,loading} = useSelector( state => state.ui);
-
+  const {loading} = useSelector( state => state.ui);
+ 
   const handleLogin = (e)=>{
       e.preventDefault();
       if(isValidLogin()){
@@ -24,23 +25,19 @@ export const LoginScreen = () => {
   }
   const isValidLogin = ()=>{
     if ( !validator.isEmail(email.trim())){
-      dispatch( setError('Email no válido'));
+      Swal.fire('Error',"El email no es válido",'error');
       return false;
     }else if (validator.isEmpty(password.trim()) ){
-      dispatch( setError('Password incorrecta'));
+      Swal.fire('Error',"La password no puede estar vacia",'error');
       return false;
     }
-    dispatch( removeError());
+  
     return true;
   }
   return (
     <>
       <h3 className='auth__title'>Login</h3>
         <form onSubmit={handleLogin}>
-              {
-                msgError&&
-                <div className='auth__alert-error'>{msgError}</div>
-              }
           <input type="text"
                  placeholder="Email"
                  name="email"
