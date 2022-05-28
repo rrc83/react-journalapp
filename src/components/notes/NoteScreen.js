@@ -11,13 +11,22 @@ export const NoteScreen = () => {
   const [formValues,handleInputChage,reset] = useForm(note);
   const {title,body,date,url,id} = formValues;
   const activeId =  useRef(note.id);
+  // para que se se actualice la imagen en NoteScreen
+  const activeUrl = useRef(note.url);
   const dispatch = useDispatch();
 
   useEffect(() => {
+  
     if(note.id !== activeId.current){
       reset(note);
       activeId.current = note.id;
     }
+
+    if(note.url !== activeUrl.current){
+      reset(note);
+      activeUrl.current = note.url;
+    }
+
   }, [note,reset])
 
   useEffect(() => {

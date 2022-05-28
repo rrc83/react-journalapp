@@ -44,7 +44,8 @@ export const notesReducer = (state=initialState,action)=>{
                     note => note.id=== action.payload.id
                             ? action.payload.note
                             : note
-                )
+                ),
+                active:action.payload.note
             }
         case types.notesDelete:
             return {

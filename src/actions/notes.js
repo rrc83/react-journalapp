@@ -94,10 +94,12 @@ export const startUploading = (file)=>{
         });
         const fileUrl = await fileUpload(file);
         const note = {
-            ...activeNote
+            ...activeNote,
+            url:fileUrl
         };
-        note.url = fileUrl;
+
         dispatch(startSaveNote(note));
+
         Swal.close();
 
     }
